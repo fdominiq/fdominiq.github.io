@@ -1,2 +1,2 @@
 # fdominiq.github.io
-#CSE160 Assignments
+# CSE160 Assignments
