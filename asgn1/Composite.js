@@ -1,5 +1,3 @@
-// Faith Dominique, 1869778
-// asg1
 class Composite{
     constructor(){
        this.type='composite';
