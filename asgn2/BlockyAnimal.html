@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8"/>
+        <title>Blocky Animal </title>
+</head>
+
+<body onload="main()">
+    <canvas height="800" id="webgl" width="800" >
+        Please use a browser that supports "canvas"
+    </canvas>
+
+    <!--Button-->
+    <p> Dog with three jointed tail, Non-cube Primitive Tail Tip and Snout</p>
+    <p> <strong>Features:</strong> Mouse Rotation, Animations, Multiple Joints, Performance Indicator</p>
+    <p> <strong>Poke Animation Supported: </strong>Shift+Click causes dog to move its head from side to side for a few secs </p>
+    <p> <strong>Other Animations:</strong> Walking and Tail Wagging </p>
+    <p> <strong>Performance Stats: </strong> </p>
+    <p id="fps"> ms:0,fps:0 </p>
+
+    Camera Angle On X<input type="range" min = "0" max="360" value="0" class = "slider"
+                        id="CameraAngleSlideX">
+    Camera Angle On Y<input type="range" min = "0" max="360" value="180" class = "slider"
+                        id="CameraAngleSlideY">
+    Camera Angle On Z<input type="range" min = "0" max="360" value="0" class = "slider"
+                            id="CameraAngleSlideZ">
+    <br>
+    First Joint
+    <input type="range" id="joint" name="joint" min="0" max="25" value="0" class = "slider">
+    Second Joint
+    <input type="range" id="joint2" name="joint2" min="0" max="12" value="0" class = "slider">
+    Head Joint
+    <input type="range" id="Head_Joint" name="joint2" min="0" max="12" value="0" class = "slider">
+    <br>
+
+    <strong>ANIMATIONS: </strong><br>
+    1. Walking
+    <button id="WalkButton_On" type="button">On</button>
+    <button id="WalkButton_Off" type="button">Off</button>
+    <br>
+    2. Tail Wagging
+    <button id="TailAnimationButton_On" type="button">On</button>
+    <button id="TailAnimationButton_Off" type="button">Off</button>
+    <br>
+
+
+
+<!-----------Source files------------>
+
+<script src="BlockyAnimal.js"></script>
+<script src="Triangular_pyramid.js"></script>
+<script src="RenderAnimal.js"></script>
+<script src="Point.js"></script>
+<script src="Triangle.js"></script>
+<script src="Circle.js"></script>
+<script src="Cube.js"></script>
+<script src="Cube_hollow.js"></script>
+<script src="lib/webgl-utils.js"></script>
+<script src="lib/webgl-debug.js"></script>
+<script src="lib/cuon-utils.js"></script>
+<script src="lib/cuon-matrix-cse160.js"></script>
+
+</body>
+</html>
