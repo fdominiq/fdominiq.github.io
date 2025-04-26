@@ -8,26 +8,27 @@ let gl;
 let u_Size;
 let a_Position;
 let u_FragColor;
-let u_ModelMatrix;
 let u_GlobalRotateMatrix
+let u_ModelMatrix;
+
 
 let g_globalAngleX = 0;
 let g_globalAngleY = 0;
 let g_globalAngleZ = 0;
+var g_globalSpeed  = 100.0;
 let g_Animation       = false;
 let g_TailAnimation   = false;
+let g_EarAnimation    = false;
 var Shift_and_Click   = false;
 var g_Angle           = 0;
 var g_Angle2          = 0;
 var head_motion       = 0;
-var g_tails_wagging    = 0;
+var g_tails_wagging   = 0;
 var g_start_time      = performance.now()/1000.0;
 var g_seconds         = performance.now()/1000.0 - g_start_time
 var g_headscan        = 0;
 
 
-
-// The Global variable that will be changed
 // Vertex shader program
 var VSHADER_SOURCE =
     'attribute vec4 a_Position;\n' + //attribute variable
@@ -66,6 +67,8 @@ function addActionForHtmlUI() {
     document.getElementById('WalkButton_Off').onclick = function(){g_Animation = false}
     document.getElementById('TailAnimationButton_On').onclick = function(){g_TailAnimation = true}
     document.getElementById('TailAnimationButton_Off').onclick = function(){g_TailAnimation = false}
+    document.getElementById('EarAnimationButton_On').onclick = function(){g_EarAnimation = true}
+    document.getElementById('EarAnimationButton_Off').onclick = function(){g_EarAnimation = false}
     
     document.getElementById('joint').addEventListener('mousemove', function () {
         g_Angle = this.value;
@@ -79,6 +82,11 @@ function addActionForHtmlUI() {
 
     document.getElementById('Head_Joint').addEventListener('mousemove', function () {
         head_motion = this.value;
+        renderScene();
+    });
+
+    document.getElementById('speed').addEventListener('mousemove', function () {
+        g_globalSpeed = 2510-this.value;
         renderScene();
     });
 }
@@ -101,19 +109,19 @@ function connectVariableToGLSL() {
 
     a_Position = gl.getAttribLocation(gl.program, 'a_Position');
     if (a_Position < 0) {
-        console.log('Failed to get the storage location of a_Position');
+        console.log('Failed to get storage location of a_Position');
         return;
     }
 
     u_FragColor = gl.getUniformLocation(gl.program, 'u_FragColor');
     if (!u_FragColor) {
-        console.log('Failed to get the storage location of u_FragColor');
+        console.log('Failed to get storage location of u_FragColor');
         return;
     }
 
     u_ModelMatrix = gl.getUniformLocation(gl.program,'u_ModelMatrix');
     if(!u_ModelMatrix){
-        console.log('Failed to get the storage location of u_ModelMatrix');
+        console.log('Failed to get storage location of u_ModelMatrix');
         return;
     }
 
@@ -136,12 +144,12 @@ function updateAnimationAngles(){
         g_Angle2 = 3 * tmp;
     }
     if (g_TailAnimation){
-        g_tails_wagging = 10 * Math.sin(g_seconds); //5
+        g_tails_wagging = 10 * Math.sin(g_seconds); 
     }
 }
 
 function tick(){
-    g_seconds = performance.now()/750.0-g_start_time;
+    g_seconds = performance.now()/g_globalSpeed-g_start_time;
     updateAnimationAngles();
     renderScene();
     requestAnimationFrame(tick);
@@ -158,10 +166,8 @@ function renderScene() {
     gl.clear(gl.COLOR_BUFFER_BIT);
 
     drawAnimal();
-
-    // Check time/display
-    var duration = performance.now() - startTime;
-    SendTextToHTML(  " ms:" + Math.floor(duration) + " fps: " + Math.floor(10000 / duration) / 10, "fps");
+    var timetaken = performance.now() - startTime;
+    SendTextToHTML(  " ms:" + Math.floor(timetaken) + " fps: " + Math.floor(1000/timetaken), "fps");
 }
 
 function SendTextToHTML(text, htmlID) {

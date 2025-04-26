@@ -1,5 +1,6 @@
 // Assignment 2
 // Faith Dominique
+
 class Cube {
    constructor() {
       this.color = [1.0, 1.0, 1.0, 1.0];

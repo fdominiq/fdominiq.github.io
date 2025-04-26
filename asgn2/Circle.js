@@ -1,5 +1,6 @@
 // Assignment 2
 // Faith Dominique
+
 class Circle {
     constructor() {
         this.type = 'circle';

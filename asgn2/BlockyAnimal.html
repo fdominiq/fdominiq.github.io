@@ -12,9 +12,10 @@
 
     <!--Button-->
     <p> Dog with three jointed tail, Non-cube Primitive Tail Tip and Snout</p>
-    <p> <strong>Features:</strong> Mouse Rotation, Animations, Multiple Joints, Performance Indicator</p>
-    <p> <strong>Poke Animation Supported: </strong>Shift+Click causes dog to move its head from side to side for a few secs </p>
-    <p> <strong>Other Animations:</strong> Walking and Tail Wagging </p>
+    <p> <strong>Features:</strong> Mouse Rotation, Multiple Animations, Multiple Joints, Poke Animation, Performance Indicator</p>
+    <p> <strong>Animations:</strong> Walking,Tail Wagging and Ear Wagging. All animations can be switched on simulataneously.</p>
+    <p> <strong>Poke Animation Supported: </strong>Shift+Click causes dog to move its head from side to side and wag its tail for a few secs </p>
+
     <p> <strong>Performance Stats: </strong> </p>
     <p id="fps"> ms:0,fps:0 </p>
 
@@ -36,12 +37,17 @@
     <strong>ANIMATIONS: </strong><br>
     1. Walking
     <button id="WalkButton_On" type="button">On</button>
+    Walking Speed
+    <input type="range" id="speed" name="Walking speed" min="1.0" max="2500.0" value="1900.0" class = "slider">
     <button id="WalkButton_Off" type="button">Off</button>
     <br>
     2. Tail Wagging
     <button id="TailAnimationButton_On" type="button">On</button>
     <button id="TailAnimationButton_Off" type="button">Off</button>
     <br>
+    3. Ears Wagging
+    <button id="EarAnimationButton_On" type="button">On</button>
+    <button id="EarAnimationButton_Off" type="button">Off</button>
 
 
 
@@ -54,7 +60,6 @@
 <script src="Triangle.js"></script>
 <script src="Circle.js"></script>
 <script src="Cube.js"></script>
-<script src="Cube_hollow.js"></script>
 <script src="lib/webgl-utils.js"></script>
 <script src="lib/webgl-debug.js"></script>
 <script src="lib/cuon-utils.js"></script>

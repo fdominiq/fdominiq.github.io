@@ -1,5 +1,6 @@
 // Assignment 2
 // Faith Dominique
+
 class Triangular_pyramid {
     constructor() {
         this.type = 'Triangular_pyramid';
