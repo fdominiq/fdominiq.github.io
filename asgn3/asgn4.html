@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+    <meta charset="utf-8"/>
+</head>
+
+<body onload="main()">
+<canvas height="600" id="webgl" width="600">
+    Please use a browser that supports "canvas"
+</canvas>
+<br>
+
+Welcome to Castle Mordor<br>
+<br> Performance Stats: <p id="fps">ms:0,fps:0 </p>
+Normal:
+<button id="Normal_On">Normal ON/OFF</button>
+<br>
+<br>
+Light Control:
+<Button id="Light_On">Light ON</Button>
+<Button id="Light_Off">Light OFF</Button>
+<br>
+<br>
+Light Motion: <button id="light_animation_On">On</button><button id="light_animation_Off">Off</button>  (Motion is on the Y axis)
+<br><br>
+
+Light Position X<input class="slider" id="lightSlideX" max="2000" min="0" type="range" value="1500">
+<br>
+    Light Position Y<input class="slider" id="lightSlideY" max="500" min="-500" type="range" value="0">
+<br>
+    Light Position Z<input class="slider" id="lightSlideZ" max="2000" min="50" type="range" value="1000">
+<br>
+
+<br><b>NOTE:</b> When using the spot light, the canvas <i>may</i> become totally dark.
+<br>This is caused by the changing position of spot light. Refresh page, and click spot light on.<br>
+<br>Spot Light:
+<button id="Spot_Light_on">Spot Light on</button>
+<button id="Spot_Light_off">Spot Light off</button>
+<br><br>
+Spot_light position X:<input class="slider" id="SpotlightSlideX" max="300" min="0" type="range" value="150">
+<br>Spot_light position Y:<input class="slider" id="SpotlightSlideY" max="300" min="0" type="range" value="150">
+<br>Spot_light position Z:<input class="slider" id="SpotlightSlideZ" max="300" min="0" type="range" value="150">
+<br><br>
+Light Color :
+<br>
+<br>
+Red <input class="slider" id="lightRed" max="255" min="0" type="range" value="255">Green <input class="slider" id="lightGreen" max="255" min="0" type="range" value="255">Blue <input class="slider" id="lightBlue" max="255" min="0" type="range" value="255">
+<br><br>
+<b> ------------------ OTHER FEATURES ------------------ </b>
+<br>Place Dog:
+<button id="CallAnimal"> Place Dog </button> Dog Animation: <button id="Animate">Dog Animation</button>
+<br><br>
+
+You can use your mouse or the WASDZXQE commands to manually explore the Castle! (OR)    <br> <b> AERIAL FLYBY</b> <button id="Random">Aerial Tour</button> (Use WASD to change starting pt of the aerial tour)<br><br>
+<b>MANUAL EXPLORE:</b> Use keyboard to explore Castle Mordor
+<br><tag-name style="white-space:pre">W : Move Forward   &#9;S : Move Backward</tag-name>
+<br><tag-name style="white-space:pre">A :  Move Left        &#9;D : Move Right</tag-name>
+<br><tag-name style="white-space:pre">Z :  Move Up             &#9;X : Move Down</tag-name>
+<br><tag-name style="white-space:pre">Q :  Look Left             &#9;E : Look Right</tag-name>
+<br><br>
+
+
+
+<script src="lib/webgl-utils.js"></script>
+<script src="lib/webgl-debug.js"></script>
+<script src="lib/cuon-utils.js"></script>
+<script src="lib/cuon-matrix-cse160.js"></script>
+<script src="camera.js"></script>
+<script src="RenderAnimal_mod.js"></script>
+<script src="Cube.js"></script>
+<script src="Triangle.js"></script>
+<script src="Circle.js"></script>
+<script src="Point.js"></script>
+<script src="sphere.js"></script>
+<script src="asgn4.js"></script>
+</body>
+</html>
