@@ -26,10 +26,10 @@ class Camera{
     left(){
         var atCopy  = new Vector3(this.at.elements);
         var eyeCopy = new Vector3(this.eye.elements);
-        var left_move = atCopy.sub(eyeCopy);
-        left_move = left_move.normalize();
-        left_move = left_move.mul(-1);
-        var s = Vector3.cross(left_move, this.up);
+        var move_left = atCopy.sub(eyeCopy);
+        move_left = move_left.normalize();
+        move_left = move_left.mul(-1);
+        var s = Vector3.cross(move_left, this.up);
         s = s.normalize();
         this.at  = this.at.add(s);
         this.eye = this.eye.add(s);
@@ -66,10 +66,22 @@ class Camera{
         var f_prime = rotationMatrix.multiplyVector3(f);
         this.at = f_prime.add(this.eye);
     }
+
+    rotDown(){
+        var atCopy  = new Vector3(this.at.elements);
+        var eyeCopy = new Vector3(this.eye.elements);
+        var f = atCopy.sub(eyeCopy);
+        var rotationMatrix = new Matrix4();
+        rotationMatrix.setRotate(-10, 1*this.up.elements[0], 1*this.up.elements[1], 1*this.up.elements[2]);
+        var f_prime = rotationMatrix.multiplyVector3(f);
+        this.at = f_prime.add(this.eye);
+    }
+
     upward(){
         this.eye.elements[1] += 1;
         this.at.elements[1]  += 1;
     }
+
     downward(){
         this.eye.elements[1] -= 1;
         this.at.elements[1]  -= 1;

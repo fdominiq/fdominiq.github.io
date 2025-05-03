@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+
+<html lang="en" >
+<head>
+    <meta charset="utf-8"/>
+    <title>Faith Dominique Assignment3</title>
+</head>
+
+<body onload="main()">
+<canvas height="600" id="webgl" width="600">
+    Please use a browser that supports "canvas"
+</canvas>
+<br>
+
+    Welcome to Castle Mordor.<br>
+    There is a hidden Gold Nugget - See if you can find it using the manual explore or the aerial tour.<br><br>
+
+    You can use your mouse or the WASDZXQE commands to manually explore the Castle! (OR)    <br> <b> AERIAL FLYBY</b> <button id="Random">Aerial Tour</button> (Use WASD to change starting pt of the aerial tour)<br><br>
+<b>MANUAL EXPLORE:</b> Use keyboard to explore Castle Mordor
+<br><tag-name style="white-space:pre">W : Move Forward   &#9;S : Move Backward</tag-name>
+<br><tag-name style="white-space:pre">A :  Move Left        &#9;D : Move Right</tag-name>
+<br><tag-name style="white-space:pre">Z :  Move Up             &#9;X : Move Down</tag-name>
+<br><tag-name style="white-space:pre">Q :  Look Left             &#9;E : Look Right</tag-name>
+
+
+<br><br> Performance Stats: <p id="fps">ms:0,fps:0 </p>
+Time lapse animation of the Castle construction: <button id="Constr">Castle Construction</button>
+<br>Time Lapse Animation Speed
+<input type="range" id="Spd" name="speed" min="5" max="120" value="30" class = "slider">
+<br><br>
+Place dog: <button id="CallAnimal">Place Dog</button> Dog Animation: <button id="Animate">DogAnimation</button>
+<br><br>
+<button id="Add">Add Blocks</button> Block will be added in front of you<br>
+To place blocks in a different spot: Use WASD Move commands and hit "Add Block" button<br>
+<button id="Del">Delete Blocks</button> Block in front of you will be deleted<br>
+To delete blocks in a different spot: Use WASD Move commands and hit "Delete Block" button<br><br>
+
+<script src="lib/webgl-utils.js"></script>
+<script src="lib/webgl-debug.js"></script>
+<script src="lib/cuon-utils.js"></script>
+<script src="lib/cuon-matrix-cse160.js"></script>
+<script src="RenderAnimal_mod.js"></script>
+<script src="Triangle.js"></script>
+<script src="Circle.js"></script>
+<script src="Point.js"></script>
+<script src="Cube.js"></script>
+<script src="camera.js"></script>
+<script src="asg3.js"></script>
+</body>
+</html>

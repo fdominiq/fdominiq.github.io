@@ -5,27 +5,25 @@ class Cube{
         this.matrix = new Matrix4();
         this.textureNum = -2;
         this.vertex = [0.0,0.0,0.0, 1.0,1.0,0.0, 1.0,0.0,0.0,
-            0.0,0.0,0.0, 1.0,1.0,0.0, 0.0,1.0,0.0,
-            0.0,1.0,0.0, 0.0,1.0,1.0, 1.0,1.0,1.0,
-            0.0,1.0,0.0,  1.0,1.0,1.0,  1.0,1.0,0.0,
-            0.0,0.0,0.0,  0.0,0.0,1.0,  1.0,0.0,1.0,
-            0.0,0.0,0.0,  1.0,0.0,1.0,  1.0,0.0,0.0,
-            0.0,0.0,1.0, 1.0,1.0,1.0, 1.0,0.0,1.0,
-            0.0,0.0,1.0, 0.0,1.0,1.0, 1.0,1.0,1.0,
-            0.0,0.0,0.0,  0.0,1.0,1.0,  0.0,1.0,0.0,
-            0.0,0.0,0.0,  0.0,1.0,1.0,  0.0,0.0,1.0,
-            1.0,0.0,0.0,  1.0,1.0,1.0,  1.0,1.0,0.0,
-            1.0,0.0,0.0,  1.0,1.0,1.0,  1.0,0.0,1.0
+                       0.0,0.0,0.0, 1.0,1.0,0.0, 0.0,1.0,0.0,
+                       0.0,1.0,0.0, 0.0,1.0,1.0, 1.0,1.0,1.0,
+                       0.0,1.0,0.0, 1.0,1.0,1.0, 1.0,1.0,0.0,
+                       0.0,0.0,0.0, 0.0,0.0,1.0, 1.0,0.0,1.0,
+                       0.0,0.0,0.0, 1.0,0.0,1.0, 1.0,0.0,0.0,
+                       0.0,0.0,1.0, 1.0,1.0,1.0, 1.0,0.0,1.0,
+                       0.0,0.0,1.0, 0.0,1.0,1.0, 1.0,1.0,1.0,
+                       0.0,0.0,0.0, 0.0,1.0,1.0, 0.0,1.0,0.0,
+                       0.0,0.0,0.0, 0.0,1.0,1.0, 0.0,0.0,1.0,
+                       1.0,0.0,0.0, 1.0,1.0,1.0, 1.0,1.0,0.0,
+                       1.0,0.0,0.0, 1.0,1.0,1.0, 1.0,0.0,1.0
         ];
     }
 
     multidrawCube(ver){
         var rgba = this.color;
-
         gl.uniform1i(u_whichTexture, this.textureNum);
         gl.uniform4f(u_FragColor, rgba[0], rgba[1], rgba[2], rgba[3]);
         gl.uniformMatrix4fv(u_ModelMatrix, false, this.matrix.elements);
-
         if (ver===0){
           drawTriangle3DUV([0.0,0.0,0.0, 1.0,1.0,0.0, 1.0,0.0,0.0],[0,0, 1,1, 1,0]);
           drawTriangle3DUV([0.0,0.0,0.0, 1.0,1.0,0.0, 0.0,1.0,0.0],[0,0, 1,1, 0,1]);
@@ -43,40 +41,22 @@ class Cube{
           drawTriangle3DUV([0.0,0.0,0.0,  0.0,1.0,1.0,  0.0,0.0,1.0],[0,0, 1,1, 0,1]);
           drawTriangle3DUV([1.0,0.0,0.0,  1.0,1.0,1.0,  1.0,1.0,0.0],[0,0, 1,1, 1,0]);
           drawTriangle3DUV([1.0,0.0,0.0,  1.0,1.0,1.0,  1.0,0.0,1.0],[0,0, 1,1, 0,1]);
+       } else if (ver===1) {  // Quick draw version of Cube
+          let combinedUV = [];
+          combinedUV = combinedUV.concat([0,0, 1,1, 1,0, 0,0, 1,1, 0,1]);
+          combinedUV = combinedUV.concat([0,0, 0,1, 1,1, 0,0, 1,1, 1,0]);
+          combinedUV = combinedUV.concat([0,0, 0,1, 1,1, 0,0, 1,1, 1,0]);
+          combinedUV = combinedUV.concat([0,0, 1,1, 1,0, 0,0, 0,1, 1,1]);
+          combinedUV = combinedUV.concat([0,0, 1,1, 1,0, 0,0, 1,1, 0,1]);
+          combinedUV = combinedUV.concat([0,0, 1,1, 1,0, 0,0, 1,1, 0,1]);
 
-        } else if (ver===1) {
-  
-            let allVertices = [];
-            allVertices = allVertices.concat(
-                [0.0,0.0,0.0, 1.0,1.0,0.0, 1.0,0.0,0.0, 0,0,0, 0,1,0, 1,1,0]);
-            allVertices = allVertices.concat(
-                [0,0,1, 1,1,1, 1,0,1, 0,0,1, 0,1,1, 1,1,1]);
-            allVertices = allVertices.concat(
-                [0,1,0, 0,1,1, 1,1,1, 0,1,0, 1,1,1, 1,1,0]);
-            allVertices = allVertices.concat(
-                [0,0,0, 0,0,1, 1,0,1, 0,0,0, 1,0,1, 1,0,0]);
-            allVertices = allVertices.concat(
-                [1,1,0, 1,1,1, 1,0,0, 1,0,0, 1,1,1, 1,0,1]);
-            allVertices = allVertices.concat(
-                [0,1,0, 0,1,1, 0,0,0, 0,0,0, 0,1,1, 0,0,1]);
+          if (g_vertexBufferCube == null){
+            initTriangle3D(this.vertex);
+          }
 
-            let allUV = [];
-            allUV = allUV.concat([0,0, 1,1, 1,0,  0,0, 0,1, 1,1]);
-            allUV = allUV.concat([0,0, 1,1, 1,0,  0,0, 0,1, 1,1]);
-            allUV = allUV.concat([0,0, 0,1, 1,1,  0,0, 1,1, 1,0]);
-            allUV = allUV.concat([0,0, 0,1, 1,1,  0,0, 1,1, 1,0]);
-            allUV = allUV.concat([0,0, 0,1, 1,1,  0,0, 1,1, 1,0]);
-            allUV = allUV.concat([0,0, 0,1, 1,1,  0,0, 1,1, 1,0]);
+          drawTriangle3DUV(this.vertex, combinedUV);
+       }
 
-            let allNorm = [];
-            allNorm = allNorm.concat([0,0,-1, 0, 0,-1,  0,0,-1,  0,0,-1,  0,0,-1,  0,0,-1]);
-            allNorm = allNorm.concat([0,0, 1, 0, 0, 1,  0,0, 1,  0,0, 1,  0,0, 1,  0,0,1]);
-            allNorm = allNorm.concat([0,1, 0, 0, 1, 0,  0,1, 0,  0,1, 0,  0,1, 0,  0,1,0]);
-            allNorm = allNorm.concat([0,-1,0, 0,-1, 0,  0,-1,0,  0,-1,0,  0,-1,0,  0,-1,0]);
-            allNorm = allNorm.concat([1,0, 0, 1, 0, 0,  1,0, 0,  1,0, 0,  1,0, 0,  1,0,0]);
-            allNorm = allNorm.concat([-1,0,0, -1,0, 0, -1,0, 0, -1,0, 0, -1,0, 0, -1,0,0]);
+    }
 
-            drawTriangle3DUVNormal(allVertices, allUV, allNorm);
-      }  // else
-  }
 }
