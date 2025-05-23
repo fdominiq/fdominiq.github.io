@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+    <meta charset="utf-8"/>
+</head>
+
+<body onload="main()">
+<canvas height="600" id="webgl" width="600">
+    Please use a browser that supports "canvas"
+</canvas>
+<br>
+
+Welcome to Castle Mordor!<br>
+Use WASDZXQE commands and mouse (shown at bottom) to explore
+<br><br> <b>Performance Stats: </b><p id="fps">ms:0,fps:0 </p>
+<button id="CastleOff"> Remove Castle ON/OFF </button> &nbsp <button id="CallAnimal"> Place Dog ON/OFF </button> &nbsp <button id="Animate">Dog Animation</button>
+<br><br>
+<b>Normals:</b>
+<button id="Normal_On">Normal ON/OFF</button>
+<br>
+<br>
+<b>LIGHT Controls: </b>
+<Button id="Light_On">Light ON</Button> &nbsp
+<Button id="Light_Off">Light OFF</Button>
+<br>
+<br>
+<b>Light Motion:</b> <button id="light_animation_On">On</button> &nbsp <button id="light_animation_Off">Off</button>  (This <i>also</i> controls the motion of the <b>Spotlight</b>)
+<br><br>
+<b>Light Position Adjustment: </b><br>
+ X<input class="slider" id="lightSlideX" max="2000" min="0" type="range" value="1500">
+ Y<input class="slider" id="lightSlideY" max="500" min="-500" type="range" value="0">
+ Z<input class="slider" id="lightSlideZ" max="2000" min="50" type="range" value="1000">
+<br>
+
+<br>
+<b>Light Color Adjustment</b> (This <i>also</i> controls the color of the <b>Spotlight</b>): 
+<br>
+Red <input class="slider" id="lightRed" max="255" min="0" type="range" value="255">Green <input class="slider" id="lightGreen" max="255" min="0" type="range" value="255">Blue <input class="slider" id="lightBlue" max="255" min="0" type="range" value="255">
+<br><br>
+<br><b>SPOTLIGHT Controls:</b>
+<button id="Spot_Light_on">Spotlight on</button> &nbsp
+<button id="Spot_Light_off">Spotlight off</button>
+<br>
+<br>
+
+<b>Spotlight Position Adjustment: </b> <br>
+X:<input class="slider" id="SpotlightSlideX" max="300" min="0" type="range" value="150">
+Y:<input class="slider" id="SpotlightSlideY" max="300" min="0" type="range" value="150">
+Z:<input class="slider" id="SpotlightSlideZ" max="300" min="0" type="range" value="150">
+<br><br>
+<b> Keyboard Commands: </b>
+<br><tag-name style="white-space:pre">W : Move Forward   &#9;S : Move Backward</tag-name>
+<br><tag-name style="white-space:pre">A :  Move Left        &#9;D : Move Right</tag-name>
+<br><tag-name style="white-space:pre">Z :  Move Up             &#9;X : Move Down</tag-name>
+<br><tag-name style="white-space:pre">Q :  Look Left             &#9;E : Look Right</tag-name>
+<br><br>
+
+
+
+<script src="lib/webgl-utils.js"></script>
+<script src="lib/webgl-debug.js"></script>
+<script src="lib/cuon-utils.js"></script>
+<script src="lib/cuon-matrix-cse160.js"></script>
+<script src="camera.js"></script>
+<script src="RenderAnimal_mod.js"></script>
+<script src="Cube.js"></script>
+<script src="Triangle.js"></script>
+<script src="Circle.js"></script>
+<script src="Point.js"></script>
+<script src="sphere.js"></script>
+<script src="asgn4.js"></script>
+</body>
+</html>
