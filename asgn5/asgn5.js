@@ -17,9 +17,9 @@ let angle = 0;
 class MinMaxGUIHelper {
     constructor(obj, minProp, maxProp, minDif) {
       this.obj = obj;
+      this.minDif = minDif;
       this.minProp = minProp;
       this.maxProp = maxProp;
-      this.minDif = minDif;
     }
     get min() {
       return this.obj[this.minProp];
@@ -33,7 +33,7 @@ class MinMaxGUIHelper {
     }
     set max(v) {
       this.obj[this.maxProp] = v;
-      this.min = this.min;  // calls the min setter
+      this.min = this.min;
     }
 }
 
@@ -77,31 +77,27 @@ function main() {
     //scene
     const scene = new THREE.Scene();
     {
-      const near = 40;
-      const far = 70;
-      scene.fog = new THREE.Fog(0xFFFFff, near, far);	
+      scene.fog = new THREE.Fog(0xFFFFff, 40, 70);	
     }
 
-    //set up plane
+    //plane
     {
       const planeSize = 100;
-
       const loader = new THREE.TextureLoader();
       const texture = loader.load('resources/images/sun.png');
       texture.encoding = THREE.sRGBEncoding;
       texture.wrapS = THREE.RepeatWrapping;
       texture.wrapT = THREE.RepeatWrapping;
       texture.magFilter = THREE.NearestFilter;
-      const repeats = planeSize/2;
-      texture.repeat.set(repeats, repeats);
+      texture.repeat.set(planeSize/2, planeSize/2);
 
-      const planeGeo = new THREE.PlaneGeometry(planeSize, planeSize);
+      const planeG = new THREE.PlaneGeometry(planeSize, planeSize);
       const planeMat = new THREE.MeshPhongMaterial({
         map: texture,
         side: THREE.DoubleSide,
       });
-      const mesh = new THREE.Mesh(planeGeo, planeMat);
-      mesh.rotation.x = Math.PI * -.5;
+      const mesh = new THREE.Mesh(planeG, planeMat);
+      mesh.rotation.x = Math.PI * - 0.5;
       scene.add(mesh);
     }
 
@@ -119,12 +115,8 @@ function main() {
 
     // Cubes
     {
-      const Cube_1_width = 5; 
-      const Cube_1_height = 10;  
-      const Cube_1_depth = 5;  
-
       const loader = new THREE.TextureLoader();
-      const geometry0 = new THREE.BoxGeometry(Cube_1_width, Cube_1_height, Cube_1_depth);
+      const geometry0 = new THREE.BoxGeometry(5, 10, 5);
       const material0 = new THREE.MeshPhongMaterial({
         map: loader.load('resources/images/building.png'),
       });
@@ -239,9 +231,7 @@ function main() {
 
     // Sphere
       const sphereRadius = 8;
-      const sphereWidthDivisions = 64;
-      const sphereHeightDivisions = 8;
-      const sphereGeo = new THREE.SphereGeometry(0.3*sphereRadius, sphereWidthDivisions, sphereHeightDivisions);
+      const sphereGeo = new THREE.SphereGeometry(0.3*sphereRadius, 64, 8);
 
       const loader = new THREE.TextureLoader();
       const sphereMat = new THREE.MeshPhongMaterial({
@@ -251,7 +241,7 @@ function main() {
       ball_mesh.position.set(26, 70, -20);
       scene.add(ball_mesh);
 
-      const sphereGeo2 = new THREE.SphereGeometry(0.4*sphereRadius, sphereWidthDivisions, sphereHeightDivisions);
+      const sphereGeo2 = new THREE.SphereGeometry(0.4*sphereRadius, 64, 8);
       const sphereMat2 = new THREE.MeshPhongMaterial({
         map: loader.load('resources/images/flag.jpg'),
       });
@@ -271,16 +261,11 @@ function main() {
       const height = 8;  
       const radialSegments = 12;  
 
-      const geometry1 = new THREE.CylinderGeometry(
-              0.7*radiusTop, 0.7*radiusBottom, height, radialSegments);
-      const geometry1_1 = new THREE.CylinderGeometry(
-              0.5*radiusTop, 0.5*radiusBottom, 4*height, radialSegments);
-      const geometry1_2 = new THREE.CylinderGeometry(
-              0.5*radiusTop, 0.175*radiusBottom, height, radialSegments);
-      const geometry2 = new THREE.CylinderGeometry(
-              radiusTop-1.5, radiusBottom-1.5, 2*height, radialSegments);
-      const geometry3 = new THREE.CylinderGeometry(
-              radiusTop-3, radiusBottom-3, height, radialSegments);
+      const geometry1 = new THREE.CylinderGeometry(0.7*radiusTop, 0.7*radiusBottom, height, radialSegments);
+      const geometry1_1 = new THREE.CylinderGeometry(0.5*radiusTop, 0.5*radiusBottom, 4*height, radialSegments);
+      const geometry1_2 = new THREE.CylinderGeometry(0.5*radiusTop, 0.175*radiusBottom, height, radialSegments);
+      const geometry2 = new THREE.CylinderGeometry(radiusTop-1.5, radiusBottom-1.5, 2*height, radialSegments);
+      const geometry3 = new THREE.CylinderGeometry(radiusTop-3, radiusBottom-3, height, radialSegments);
 
       const material1 = new THREE.MeshPhongMaterial({
         map: loader.load('resources/images/building.png'),
@@ -322,14 +307,12 @@ function main() {
       cylinder5.position.set(32,24,23);
       scene.add(cylinder5);
 
-      const geometry4 = new THREE.CylinderGeometry(
-              radiusTop-3, 1.2*radiusBottom, 3*height, radialSegments);
+      const geometry4 = new THREE.CylinderGeometry(radiusTop-3, 1.2*radiusBottom, 3*height, radialSegments);
       const cylinder6 = new THREE.Mesh(geometry4, material3);
       cylinder6.position.set(32,14,13);
       scene.add(cylinder6);
 
-      const geometry5 = new THREE.CylinderGeometry(
-              0.8*radiusTop, radiusBottom-3, 2*height, radialSegments);
+      const geometry5 = new THREE.CylinderGeometry(0.8*radiusTop, radiusBottom-3, 2*height, radialSegments);
       const cylinder7 = new THREE.Mesh(geometry5, material1);
       cylinder7.position.set(32,24,13);
       scene.add(cylinder7);
@@ -387,11 +370,9 @@ function main() {
 
     //Cone
     {
-      const radius = 5; 
       const height = 12;  
-      const radialSegments = 16;
 
-      const geometry3 = new THREE.ConeGeometry(radius, 1.8*height, radialSegments);
+      const geometry3 = new THREE.ConeGeometry(5, 1.8*height, 16);
       const material3 = new THREE.MeshPhongMaterial({
         map: loader.load('resources/images/building.png'),
       });
@@ -402,7 +383,7 @@ function main() {
       const material4 = new THREE.MeshPhongMaterial({
         map: loader.load('resources/images/grassb.png'),
       });
-      const geometry3_5 = new THREE.ConeGeometry(radius, 6*height, radialSegments);
+      const geometry3_5 = new THREE.ConeGeometry(5, 6*height, 16);
 
       // Cones in the back
       const Cone2 = new THREE.Mesh(geometry3_5, material4);
@@ -414,11 +395,7 @@ function main() {
     }
 
     {
-      const skyColor = 0xB1E1FF;
-      const groundColor = 0xB97A20;
-      const intensity = 1;
-      const light = new THREE.HemisphereLight(skyColor, groundColor, intensity);
-      scene.add(light);
+      scene.add(new THREE.HemisphereLight(0xB1E1FE, 0xB97A20, 1));
     }
 
     //GLB Figures ------------------------
@@ -481,31 +458,15 @@ function main() {
 
     //LIGHT Types ----------------------------------------
     {
-      const color = 0xff0000;
-      const intensity = 1;
-      const light = new THREE.DirectionalLight(color, intensity);
+      const light = new THREE.DirectionalLight(0xff0000, 1);
       light.position.set(5, 10, 12);
       scene.add(light);
       scene.add(light.target);
     }
 
-    // Point
-    {
-      const color = 0xffffff;
-      const intensity = 1;
-      const light = new THREE.PointLight(color, intensity);
-      light.position.set(3, 43, -20);
-      scene.add(light);
-
-      const helper = new THREE.PointLightHelper(light);
-      scene.add(helper);
-    }
-
     // Direct
     {
-      const color = 0x00FF00;
-      const intensity = 1;
-      const light = new THREE.DirectionalLight(color, intensity);
+      const light = new THREE.DirectionalLight(0x00FF00, 1);
       light.position.set(0, 10, 0);
       light.target.position.set(-5, 0, 0);
       scene.add(light);
@@ -515,22 +476,27 @@ function main() {
     // Spot
       const color = 0xffff00;
       const intensity = 4000;
-      const light1 = new THREE.SpotLight(color, intensity);
+      const light1 = new THREE.SpotLight(0xffff00, 4000);
       light1.position.set(4,10,8);
       light1.target.position.set(4,0,8);
       scene.add(light1);
       scene.add(light1.target);
 
-    // Multi-Rendering
-    const rtWidth = 512;
-    const rtHeight = 512;
-    const renderTarget = new THREE.WebGLRenderTarget(rtWidth, rtHeight);
+    // Point
+    {
+      const light = new THREE.PointLight(0xffffff, 1);
+      light.position.set(3, 43, -20);
+      scene.add(light);
 
-    const rtFov = 75;
-    const rtAspect = rtWidth / rtHeight;
-    const rtNear = 0.1;
-    const rtFar = 5;
-    const rtCamera = new THREE.PerspectiveCamera(rtFov, rtAspect, rtNear, rtFar);
+      const helper = new THREE.PointLightHelper(light);
+      scene.add(helper);
+    }
+
+
+
+    // Multi-Rendering
+    const renderTarget = new THREE.WebGLRenderTarget(512, 512);
+    const rtCamera = new THREE.PerspectiveCamera(75, 1, 0.1, 5);
     rtCamera.position.z = 2;
 
     const rtScene = new THREE.Scene();
@@ -550,13 +516,13 @@ function main() {
       rtScene.add(cube);
 
       cube.position.x = x;
-      // if (num==2) { cube.position.y = y;}
+      if (num==2) { cube.position.y = y;}
       return cube;
     }
 
     const rtCubes = [
       makeInstance(geometry, 0xffff00, -1,0,0, 1),
-      //makeInstance(geometry, 0x0000ff, 0,0,0, 2),
+      makeInstance(geometry, 0x0000ff, 0,0,0, 2),
       makeInstance(geometry, 0x00ff00, 1,0,0, 3)];
 
     const material = new THREE.MeshPhongMaterial({
@@ -567,7 +533,6 @@ function main() {
     const cube = new THREE.Mesh(geometry2, material);
     cube.position.set(0,20,-12);
     scene.add(cube);
-
 
     const gui = new GUI();
     gui.add(Camera[0], 'fov', 1, 180); 
@@ -624,8 +589,6 @@ function main() {
       // render original view
       {
         const aspect = setScissorForElement(view1Elem);
-
-        // adjust the camera for aspect
         Camera[0].aspect = aspect;
         Camera[0].updateProjectionMatrix();
 
@@ -634,11 +597,9 @@ function main() {
         renderer.render(scene, Camera[0]);
       }
 
-      // render from 2nd camera
+      // 2nd camera
       {
         const aspect = setScissorForElement(view2Elem);
-
-        // adjust the camera for this aspect
         Camera[1].aspect = aspect;
         Camera[1].updateProjectionMatrix();
         cameraHelper.visible = true;
@@ -655,20 +616,18 @@ function main() {
       const elemRect = elem.getBoundingClientRect();
 
       // canvas relative rectangle
-      const right = Math.min(elemRect.right, canvasRect.right) - canvasRect.left;
-      const left = Math.max(0, elemRect.left - canvasRect.left);
       const bottom = Math.min(elemRect.bottom, canvasRect.bottom) - canvasRect.top;
       const top = Math.max(0, elemRect.top - canvasRect.top);
-
+      const right = Math.min(elemRect.right, canvasRect.right) - canvasRect.left;
+      const left = Math.max(0, elemRect.left - canvasRect.left);
       const width = Math.min(canvasRect.width, right - left);
       const height = Math.min(canvasRect.height, bottom - top);
 
-      // scissor to only render to part of the canvas
+      // scissor to render part of the canvas
       const positiveYUpBottom = canvasRect.height - bottom;
       renderer.setScissor(left, positiveYUpBottom, width, height);
       renderer.setViewport(left, positiveYUpBottom, width, height);
 
-      // return aspect
       return width / height;
   }
 
